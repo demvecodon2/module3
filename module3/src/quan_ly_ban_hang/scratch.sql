@@ -1,26 +1,32 @@
-create database QuanLyBanHang ;
-use QuanLyBanHang;
-create table Customer(
-    c_id int primary key auto_increment,
-    c_name varchar(100),
-    c_age int
+CREATE DATABASE QuanLyBanHang;
+
+USE QuanLyBanHang;
+
+CREATE TABLE Customer (
+                          c_id INT PRIMARY KEY AUTO_INCREMENT,
+                          c_name VARCHAR(100),
+                          c_age INT
 );
-create table Order(
-    o_id int primary key auto_increment,
-    c_id int,
-    o_date datetime,
-    o_total_price double,
-   foreign key (c_id) references Customer(c_id)
+
+CREATE TABLE `Order` (
+                         o_id INT PRIMARY KEY AUTO_INCREMENT,
+                         c_id INT,
+                         o_date DATETIME,
+                         o_total_price DECIMAL(10, 2),
+                         FOREIGN KEY (c_id) REFERENCES Customer(c_id)
 );
-create table Product(
-  p_id int primary key auto_increment,
-  p_name varchar(100),
-  p_prive double
+
+CREATE TABLE Product (
+                         p_id INT PRIMARY KEY AUTO_INCREMENT,
+                         p_name VARCHAR(100),
+                         p_price DECIMAL(10, 2)
 );
-create table Orderdetail (
-  o_id int,
-  p_id int,
-  od_qty varchar(100),
-    foreign key (o_id) references Order(o_id),
-    foreign key (p_id) references Product(p_id)
+CREATE TABLE Orderdetail (
+                             o_id INT,
+                             p_id INT,
+                             od_qty INT,
+                             od_price DECIMAL(10, 2),
+                             PRIMARY KEY (o_id, p_id),
+                             FOREIGN KEY (o_id) REFERENCES `Order`(o_id),
+                             FOREIGN KEY (p_id) REFERENCES Product(p_id)
 );
