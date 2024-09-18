@@ -1,12 +1,15 @@
-CREATE DATABASE QuanLyBanHang;
+CREATE DATABASE quan_ly_ban_hang;
 
-USE QuanLyBanHang;
+USE quan_ly_ban_hang;
 
 CREATE TABLE Customer (
                           c_id INT PRIMARY KEY AUTO_INCREMENT,
                           c_name VARCHAR(100),
                           c_age INT
 );
+insert into customer (c_id, c_name, c_age) values (1,'Minh Quan','10'),
+                                                  (2,'Ngoc Oanh','20'),
+                                                  (3,'Hong Ha','50');
 
 CREATE TABLE `Order` (
                          o_id INT PRIMARY KEY AUTO_INCREMENT,

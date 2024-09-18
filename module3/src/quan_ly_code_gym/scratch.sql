@@ -1,10 +1,10 @@
-CREATE DATABASE QuanLyCodeGym;
-USE QuanLyCodeGym;
+CREATE DATABASE quan_ly_code_gym;
+USE quan_ly_code_gym;
 
 CREATE TABLE account (
                          account_name  VARCHAR(50) PRIMARY KEY,
                          password      VARCHAR(30) NOT NULL,
-                         creation_date DATETIME,
+                         creation_date DATE,
                          status        VARCHAR(20)
 );
 
@@ -26,8 +26,8 @@ VALUES ('lop c06'),
 CREATE TABLE class (
                        id_class           INT PRIMARY KEY AUTO_INCREMENT,
                        id_type_class      INT,
-                       start_date         DATETIME,
-                       end_day            DATETIME,
+                       start_date         DATE,
+                       end_day            DATE,
                        number_of_students INT NOT NULL,
                        teaching_industry  VARCHAR(40),
                        FOREIGN KEY (id_type_class) REFERENCES clas_type (id_type_class)
@@ -43,13 +43,13 @@ CREATE TABLE teacher (
                          id_class      INT,
                          account_name  VARCHAR(50) UNIQUE,
                          lecturer_name VARCHAR(80),
-                         Email         VARCHAR(50),
-                         Phone         VARCHAR(15),
+                         email         VARCHAR(50),
+                         phone         VARCHAR(15),
                          FOREIGN KEY (id_class) REFERENCES class (id_class),
                          FOREIGN KEY (account_name) REFERENCES account (account_name)
 );
 
-INSERT INTO teacher (id_class, account_name, lecturer_name, Email, Phone)
+INSERT INTO teacher (id_class, account_name, lecturer_name, email, phone)
 VALUES (2, 'tuyet12', 'Tuyet Hoang', 'tuyet.hoang@example.com', '123-456-7880'),
        (1, 'hieu123', 'Hieu Nguyen', 'hieu.nguyen@example.com', '183-456-7890');
 
@@ -59,16 +59,16 @@ CREATE TABLE student (
                          id_instructor  INT,
                          account_name   VARCHAR(50) UNIQUE,
                          student_name   VARCHAR(80),
-                         date_of_birth  DATETIME,
-                         Address        VARCHAR(100),
-                         Phone          VARCHAR(20),
-                         Email          VARCHAR(50),
-                         admission_date DATETIME,
+                         date_of_birth  DATE,
+                         address        VARCHAR(100),
+                         phone          VARCHAR(20),
+                         email          VARCHAR(50),
+                         admission_date DATE,
                          FOREIGN KEY (id_class) REFERENCES class (id_class),
                          FOREIGN KEY (account_name) REFERENCES account (account_name)
 );
 
-INSERT INTO student (id_class, id_instructor, account_name, student_name, date_of_birth, Address, Phone, Email, admission_date)
+INSERT INTO student (id_class, id_instructor, account_name, student_name, date_of_birth, address, phone, email, admission_date)
 VALUES (1, 1, 'tya', 'Tuan Anh', '2000-05-15', '123 Main St, hue', '098-765-4421', 'tuan.anh@example.com', '2024-09-01'),
        (2, 2, 'tuyet12', 'tien', '2000-05-15', '123 Main St, quang tri', '098-765-5321', 'hieu.anh@example.com', '2024-09-01'),
        (3, 2, 'hieu123', 'Toan', '2000-05-15', '123 Main St, quang tri', '098-765-4321', 'toan@example.com', '2024-09-01');
@@ -110,7 +110,7 @@ FROM student s LEFT JOIN class c ON s.id_class = c.id_class;
 
 SELECT student_id,student_name,date_of_birth,Address,Phone,Email,
 admission_date,id_class,id_instructor
-FROM student WHERE student_name IN ('Tien', 'Toan');
+FROM student WHERE student_name like '%tien'  ;
 
 SELECT c.id_class, c.teaching_industry, COUNT(s.student_id) AS number_of_students
 FROM class c LEFT JOIN student s ON c.id_class = s.id_class
@@ -118,4 +118,4 @@ GROUP BY c.id_class, c.teaching_industry;
 
 SELECT student_id, student_name, date_of_birth, Address, Phone, Email, admission_date,
 id_class, id_instructor
-FROM student ORDER BY student_name ASC;
+FROM student ORDER BY student_name ASC,address asc ;
