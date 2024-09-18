@@ -162,46 +162,35 @@ FROM khach_hang WHERE YEAR(ngay_sinh) >= 1997 AND dia_chi LIKE '%Quảng%';
 
 SELECT kh.id_khach_hang, kh.ho_ten, COUNT(hd.id_hop_dong) AS so_lan_dat_phong
 FROM khach_hang kh
-         JOIN loai_khach lk ON kh.id_loai_khach = lk.id_loai_khach
-         LEFT JOIN hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang
+ JOIN loai_khach lk ON kh.id_loai_khach = lk.id_loai_khach
+ LEFT JOIN hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang
 WHERE lk.ten_loai_khach = 'Diamond'
 GROUP BY kh.id_khach_hang, kh.ho_ten
 ORDER BY so_lan_dat_phong ASC;
 
 SELECT dv.id_dich_vu, dv.ten_dich_vu, dv.dien_tich, dv.chi_phi_thue, ldv.ten_loai_dich_vu
 FROM dich_vu dv
-         JOIN loai_dich_vu ldv ON dv.id_loai_dich_vu = ldv.id_loai_dich_vu
-         LEFT JOIN hop_dong hd ON dv.id_dich_vu = hd.id_dich_vu
+ JOIN loai_dich_vu ldv ON dv.id_loai_dich_vu = ldv.id_loai_dich_vu
+ LEFT JOIN hop_dong hd ON dv.id_dich_vu = hd.id_dich_vu
 WHERE hd.id_hop_dong IS NULL
-   OR hd.ngay_lam_hop_dong NOT BETWEEN '2019-01-01' AND '2019-03-31';
+ OR hd.ngay_lam_hop_dong NOT BETWEEN '2024-01-01' AND '2025-03-31';
 
 SELECT dv.id_dich_vu, dv.ten_dich_vu, dv.dien_tich, dv.so_nguoi_toi_da, dv.chi_phi_thue, ldv.ten_loai_dich_vu
-FROM dich_vu dv
-         JOIN loai_dich_vu ldv ON dv.id_loai_dich_vu = ldv.id_loai_dich_vu
-WHERE EXISTS (
-    SELECT 1
-    FROM hop_dong hd
-    WHERE hd.id_dich_vu = dv.id_dich_vu
-      AND YEAR(hd.ngay_lam_hop_dong) = 2024
-)
-  AND NOT EXISTS (
-    SELECT 1
-    FROM hop_dong hd
-    WHERE hd.id_dich_vu = dv.id_dich_vu
-      AND YEAR(hd.ngay_lam_hop_dong) = 2025
+FROM dich_vu dv JOIN loai_dich_vu ldv ON dv.id_loai_dich_vu = ldv.id_loai_dich_vu
+WHERE EXISTS (SELECT 1 FROM hop_dong hd WHERE hd.id_dich_vu = dv.id_dich_vu AND YEAR(hd.ngay_lam_hop_dong) = 2024)
+AND NOT EXISTS ( SELECT 1 FROM hop_dong hd WHERE hd.id_dich_vu = dv.id_dich_vu
+AND YEAR(hd.ngay_lam_hop_dong) = 2025
 );
 
-SELECT DISTINCT ho_ten AS HoTenKhachHang
-FROM khach_hang;
+SELECT
+    DATE_FORMAT(ngay_lam_hop_dong, '%Y-%m') AS month,
+    COUNT(id_hop_dong) AS customer_count,
+    SUM(tong_tien) AS total_revenue
+FROM hop_dong WHERE YEAR(ngay_lam_hop_dong) = 2024
+GROUP BY month ORDER BY month;
 
-SELECT ho_ten AS HoTenKhachHang
-FROM khach_hang
-GROUP BY ho_ten;
+SELECT DISTINCT ho_ten AS HoTenKhachHang FROM khach_hang;
+SELECT ho_ten AS HoTenKhachHang FROM khach_hang GROUP BY ho_ten;
 
-
-SELECT ho_ten AS HoTenKhachHang
-FROM (
-         SELECT ho_ten
-         FROM khach_hang
-         GROUP BY ho_ten
-     ) AS unique_names;
+SELECT ho_ten AS HoTenKhachHang FROM ( SELECT ho_ten FROM khach_hang
+ GROUP BY ho_ten ) AS unique_names;

@@ -52,7 +52,7 @@ INSERT INTO orderdetail (o_id, p_id, od_qty)VALUES
                                                            (2, 3, 3);
 select *from orders ;
 SELECT c.c_name AS Customer_Name,p.p_name AS Product_Name,od.od_qty AS Quantity,o.o_date AS Order_Date,
-    o.o_total_price AS Total_Price
+ o.o_total_price AS Total_Price
 FROM customer c JOIN orders o ON c.c_id = o.c_id JOIN orderdetail od ON o.o_id = od.o_id
 JOIN product p ON od.p_id = p.p_id ORDER BY c.c_name, o.o_date;
 
@@ -64,3 +64,5 @@ SELECT o.o_id AS Order_ID, o.o_date AS Sale_Date, SUM(od.od_qty * p.p_price) AS 
 FROM  orders o JOIN orderdetail od ON o.o_id = od.o_id JOIN product p ON od.p_id = p.p_id
 GROUP BY o.o_id, o.o_date;
 
+alter table orders drop column hi;
+alter table orders add column hi int;

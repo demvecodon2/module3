@@ -110,7 +110,7 @@ FROM student s LEFT JOIN class c ON s.id_class = c.id_class;
 
 SELECT student_id,student_name,date_of_birth,Address,Phone,Email,
 admission_date,id_class,id_instructor
-FROM student WHERE student_name like '%tien'  ;
+FROM student WHERE student_name like '%tien' or student_name like '%hieu%';
 
 SELECT c.id_class, c.teaching_industry, COUNT(s.student_id) AS number_of_students
 FROM class c LEFT JOIN student s ON c.id_class = s.id_class
@@ -119,3 +119,14 @@ GROUP BY c.id_class, c.teaching_industry;
 SELECT student_id, student_name, date_of_birth, Address, Phone, Email, admission_date,
 id_class, id_instructor
 FROM student ORDER BY student_name ASC,address asc ;
+
+
+DELIMITER //
+CREATE PROCEDURE abc()
+BEGIN
+    SELECT c.id_class, c.teaching_industry, COUNT(s.student_id) AS number_of_students
+    FROM class c LEFT JOIN student s ON c.id_class = s.id_class
+    GROUP BY c.id_class, c.teaching_industry;
+end //
+DELIMITER ;
+CALL abc()
