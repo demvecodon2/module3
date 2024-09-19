@@ -182,15 +182,39 @@ AND NOT EXISTS ( SELECT 1 FROM hop_dong hd WHERE hd.id_dich_vu = dv.id_dich_vu
 AND YEAR(hd.ngay_lam_hop_dong) = 2025
 );
 
-SELECT
-    DATE_FORMAT(ngay_lam_hop_dong, '%Y-%m') AS month,
-    COUNT(id_hop_dong) AS customer_count,
-    SUM(tong_tien) AS total_revenue
-FROM hop_dong WHERE YEAR(ngay_lam_hop_dong) = 2024
-GROUP BY month ORDER BY month;
-
 SELECT DISTINCT ho_ten AS HoTenKhachHang FROM khach_hang;
 SELECT ho_ten AS HoTenKhachHang FROM khach_hang GROUP BY ho_ten;
 
 SELECT ho_ten AS HoTenKhachHang FROM ( SELECT ho_ten FROM khach_hang
  GROUP BY ho_ten ) AS unique_names;
+
+select date_format(ngay_lam_hop_dong,'%y-%m') as month,
+       count(distinct id_khach_hang) as customer_count,
+       sum(tong_tien) as total_revenue
+from hop_dong
+where year(ngay_lam_hop_dong)=2024
+group by month
+order by month;
+
+SELECT
+    dvdk.ten_dich_vu_di_kem AS TenDichVuDiKem,
+    kh.ho_ten AS HoTenKhachHang,
+    kh.dia_chi AS DiaChi,
+    hd.ngay_lam_hop_dong AS NgayLamHopDong,
+    hd.ngay_ket_thuc AS NgayKetThuc,
+    hdct.so_luong AS SoLuong
+FROM
+    khach_hang kh
+        JOIN
+    loai_khach lk ON kh.id_loai_khach = lk.id_loai_khach
+        JOIN
+    hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang
+        JOIN
+    hop_dong_chi_tiet hdct ON hd.id_hop_dong = hdct.id_hop_dong
+        JOIN
+    di_vu_di_kem dvdk ON hdct.id_dich_vu_di_kem = dvdk.id_dich_vu_di_kem
+WHERE
+    LOWER(lk.ten_loai_khach) = 'diamond'
+  AND (LOWER(kh.dia_chi) LIKE '%quảng nam%' OR LOWER(kh.dia_chi) LIKE '%huế%')
+ORDER BY
+    kh.ho_ten, dvdk.ten_dich_vu_di_kem;

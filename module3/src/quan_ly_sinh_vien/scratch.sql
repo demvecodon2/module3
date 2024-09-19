@@ -56,7 +56,10 @@ where m.mark =(select min(mark)from mark);
 select s.* from subject s join mark m on s.id_sub = m.id_sub
 where m.mark=(select max(mark)from mark);
 
-select  s.id_student,s.student_name,s.address,s.phone, avg(m.mark) as average_mark
-from student s left join mark m on s.id_student = m.id_student
-group by s.id_student, s.student_name, s.address, s.phone
-order by average_mark desc ;
+select  s.id_student, s.student_name, avg(m.mark) as average_mark
+from student s left join  mark m on s.id_student = m.id_student
+group by    s.id_student, s.student_name
+order by    average_mark desc ;
+
+
+
