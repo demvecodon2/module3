@@ -196,25 +196,48 @@ where year(ngay_lam_hop_dong)=2024
 group by month
 order by month;
 
+SELECT dvdk.ten_dich_vu_di_kem AS TenDichVuDiKem, kh.ho_ten AS HoTenKhachHang, kh.dia_chi AS DiaChi,
+ hd.ngay_lam_hop_dong AS NgayLamHopDong, hd.ngay_ket_thuc AS NgayKetThuc, hdct.so_luong AS SoLuong
+FROM khach_hang kh JOIN loai_khach lk ON kh.id_loai_khach = lk.id_loai_khach JOIN
+ hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang JOIN
+ hop_dong_chi_tiet hdct ON hd.id_hop_dong = hdct.id_hop_dong JOIN
+ di_vu_di_kem dvdk ON hdct.id_dich_vu_di_kem = dvdk.id_dich_vu_di_kem
+WHERE LOWER(lk.ten_loai_khach) = 'diamond'
+ AND (LOWER(kh.dia_chi) LIKE '%quảng nam%' OR LOWER(kh.dia_chi) LIKE '%huế%')
+ORDER BY kh.ho_ten, dvdk.ten_dich_vu_di_kem;
+
+SELECT hd.id_hop_dong AS IDHopDong, ldv.ten_loai_dich_vu AS TenLoaiDichVu, dvdk.ten_dich_vu_di_kem AS TenDichVuDiKem,
+ COUNT(hdct.id_hop_dong_chi_tiet) AS SoLanSuDung
+FROM hop_dong_chi_tiet hdct  JOIN hop_dong hd ON hdct.id_hop_dong = hd.id_hop_dong JOIN
+ di_vu_di_kem dvdk ON hdct.id_dich_vu_di_kem = dvdk.id_dich_vu_di_kem JOIN
+loai_dich_vu ldv ON dvdk.id_dich_vu_di_kem = dvdk.id_dich_vu_di_kem
+GROUP BY hd.id_hop_dong, ldv.ten_loai_dich_vu, dvdk.ten_dich_vu_di_kem
+HAVING SoLanSuDung = 1;
+
 SELECT
-    dvdk.ten_dich_vu_di_kem AS TenDichVuDiKem,
-    kh.ho_ten AS HoTenKhachHang,
-    kh.dia_chi AS DiaChi,
-    hd.ngay_lam_hop_dong AS NgayLamHopDong,
-    hd.ngay_ket_thuc AS NgayKetThuc,
-    hdct.so_luong AS SoLuong
+    nv.id_nhan_vien AS IDNhanVien,
+    nv.ho_ten AS HoTen,
+    td.trinh_do AS TrinhDo,
+    bp.ten_bo_phan AS TenBoPhan,
+    nv.so_dien_thoai AS SoDienThoai,
+    nv.dia_chi AS DiaChi
 FROM
-    khach_hang kh
+    nhan_vien nv
         JOIN
-    loai_khach lk ON kh.id_loai_khach = lk.id_loai_khach
+    trinh_do td ON nv.id_trinh_do = td.id_trinh_do
         JOIN
-    hop_dong hd ON kh.id_khach_hang = hd.id_khach_hang
-        JOIN
-    hop_dong_chi_tiet hdct ON hd.id_hop_dong = hdct.id_hop_dong
-        JOIN
-    di_vu_di_kem dvdk ON hdct.id_dich_vu_di_kem = dvdk.id_dich_vu_di_kem
-WHERE
-    LOWER(lk.ten_loai_khach) = 'diamond'
-  AND (LOWER(kh.dia_chi) LIKE '%quảng nam%' OR LOWER(kh.dia_chi) LIKE '%huế%')
-ORDER BY
-    kh.ho_ten, dvdk.ten_dich_vu_di_kem;
+    bo_phan bp ON nv.id_bo_phan = bp.id_bo_phan
+        LEFT JOIN
+    hop_dong hd ON nv.id_nhan_vien = hd.id_nhan_vien
+        AND YEAR(hd.ngay_lam_hop_dong) BETWEEN 2018 AND 2019
+GROUP BY
+    nv.id_nhan_vien
+HAVING
+    COUNT(hd.id_hop_dong) <= 3;
+
+DELETE FROM nhan_vien
+WHERE id_nhan_vien NOT IN (
+    SELECT id_nhan_vien
+    FROM hop_dong
+    WHERE YEAR(ngay_lam_hop_dong) BETWEEN 2017 AND 2019
+);
