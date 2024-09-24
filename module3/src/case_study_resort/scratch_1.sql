@@ -179,8 +179,7 @@ VALUES (1, 1, 1, '23'),
        (2, 2, 2, '1'),
        (3, 3, 3, '4');
 
-select *
-from nhan_vien
+select * from nhan_vien
 where ho_ten like '%t';
 
 SELECT id_khach_hang,
@@ -299,7 +298,6 @@ WHERE kh.id_loai_khach = (SELECT id_loai_khach FROM loai_khach WHERE ten_loai_kh
     HAVING SUM(hd.tong_tien) > 10000
 );
 
-
 DELETE FROM hop_dong
 WHERE ngay_lam_hop_dong < '2024-01-01';
 DELETE FROM khach_hang
@@ -327,9 +325,7 @@ SELECT
     nv.dia_chi AS DiaChi
 FROM
     nhan_vien nv
-
 UNION ALL
-
 SELECT
     NULL AS IDNhanVien,
     kh.id_khach_hang AS IDKhachHang,
