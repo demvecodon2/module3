@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "TranslateServlet", urlPatterns = "/translate")
+@WebServlet(name = "TranslateServlet", value = "/translate")
 public class Dictionary extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
