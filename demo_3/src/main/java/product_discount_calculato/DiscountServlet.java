@@ -10,22 +10,19 @@ import java.io.IOException;
 @WebServlet("/DiscountServlet")
 public class DiscountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Nhận dữ liệu từ form
         String description = request.getParameter("description");
         double listPrice = Double.parseDouble(request.getParameter("listPrice"));
         double discountPercent = Double.parseDouble(request.getParameter("discountPercent"));
 
-        // Tính toán chiết khấu
         double discountAmount = listPrice * discountPercent * 0.01;
         double discountPrice = listPrice - discountAmount;
 
-        // Chuyển tiếp đến trang hiển thị kết quả
         request.setAttribute("description", description);
         request.setAttribute("listPrice", listPrice);
         request.setAttribute("discountPercent", discountPercent);
         request.setAttribute("discountAmount", discountAmount);
         request.setAttribute("discountPrice", discountPrice);
 
-        request.getRequestDispatcher("/display-discount.jsp").forward(request, response);
+        request.getRequestDispatcher("/view/display-discount.jsp").forward(request, response);
     }
 }

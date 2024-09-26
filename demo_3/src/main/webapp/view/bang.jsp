@@ -5,12 +5,28 @@
   Time: 2:45 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE HTML>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<style type="text/css">
+    .login {
+        height:200px; width:250px;
+        margin:0;
+        padding:20px;
+        border:1px #CCC solid;
+    }
+    .login input {
+        padding:5px; margin:5px
+    }
+</style>
+<body>
+<form action="/login" method="post">
+    <div class="login">
+        <h2>Login</h2>
+        <input type="text" name="username" size="20" placeholder="username" />
+        <input type="password" name="password" size="20" placeholder="password" />
+        <input type="submit" value="Sign in"/>
+    </div>
+</form>
+</body>
 </html>
