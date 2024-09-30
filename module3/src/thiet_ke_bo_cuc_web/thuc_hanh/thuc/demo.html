@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CSS Display Values</title>
+  <style>
+    .grid {
+      display: grid;
+      font-size: 3rem;
+      grid-template-areas:
+                  'header header header header'
+                  'left-sidebar content content right-sidebar'
+                  'footer footer footer footer';
+      gap: 10px;
+    }
+    #grid-1 {
+      grid-area: header;
+      background-color: yellow;
+      height: 100px;
+      padding: 20px;
+      text-align: center;
+    }
+    #grid-2 {
+      grid-area: left-sidebar;
+      background-color: lightgreen;
+      height: 200px;
+      padding: 20px;
+      text-align: center;
+    }
+    #grid-3 {
+      grid-area: content;
+      background-color: lightblue;
+      height: 200px;
+      padding: 20px;
+      text-align: center;
+    }
+    #grid-4 {
+      grid-area: right-sidebar;
+      background-color: lightgreen;
+      height: 200px;
+      padding: 20px;
+      text-align: center;
+    }
+    #grid-5 {
+      grid-area: footer;
+      background-color: yellow;
+      height: 100px;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<h1>CSS Display Grid</h1>
+<div class="grid">
+  <div id="grid-1">Header</div>
+  <div id="grid-2">Left Sidebar</div>
+  <div id="grid-3">Content</div>
+  <div id="grid-4">Right Sidebar</div>
+  <div id="grid-5">Footer</div>
+</div>
+</body>
+</html>
