@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff7d6;
+}
+
+.logo {
+    height: 220px;
+}
+
+.banner {
+    background-color: #ffd2ab;
+}
+
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.text-danger {
+    font-size: 1.25rem;
+}
+
+.card-img-top {
+    height: 300px; /* Adjust this height as needed */
+    object-fit: cover; /* Ensures images cover the area */
+}
+
+.navbar-nav .nav-link {
+    color: #4cc844;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.form-control {
+    width: 250px;
+}
+
+.btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.btn-outline-success:hover {
+    background-color: #ffff82;
+    color: white;
+}
+
+.custom-carousel {
+    max-width: 100%; /* Ensure it doesn't exceed the container */
+    margin: auto; /* Center the carousel */
+}
+
+.custom-carousel .carousel-inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 600px; /* Set desired height for carousel */
+}
+
+.custom-carousel .carousel-inner img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio */
+    transform: translate(-50%, -50%); /* Center the image */
+}
+.carousel img {
+    max-height: 400px;
+    width: 100%;
+    object-fit: cover;
+}
+.navbar {
+    transition: background-color 0.3s, padding 0.3s;
+}
+.navbar.sticky {
+    background-color: #f8f9fa;
+    padding: 10px 0;
+}
+.carousel img {
+    max-height: 400px;
+    width: 100%;
+    object-fit: cover;
+}

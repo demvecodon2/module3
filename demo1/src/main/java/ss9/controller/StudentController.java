@@ -31,19 +31,19 @@ public class StudentController extends HttpServlet {
                 int id = Integer.parseInt(req.getParameter("id"));
                 Student student = studentService.getById(id);
                 req.setAttribute("student", student);
-                req.getRequestDispatcher("/view/edit.jsp").forward(req, resp);
+                req.getRequestDispatcher("/view/update.jsp").forward(req, resp);
                 break;
             case "search":
                 String searchTerm = req.getParameter("search");
                 List<Student> searchResults = studentService.searchByName(searchTerm);
                 req.setAttribute("students", searchResults);
-                req.setAttribute("nameClass", "C0624G1");
+                req.setAttribute("nameClass", "students");
                 req.getRequestDispatcher("/view/studentList.jsp").forward(req, resp);
                 break;
             default:
                 List<Student> students = studentService.getAll();
                 req.setAttribute("students", students);
-                req.setAttribute("nameClass", "C0624G1");
+                req.setAttribute("nameClass", "students");
                 req.getRequestDispatcher("/view/studentList.jsp").forward(req, resp);
                 break;
         }
@@ -62,7 +62,7 @@ public class StudentController extends HttpServlet {
                 String address = req.getParameter("address");
                 Student student = new Student(name, address);
                 studentService.add(student);
-                resp.sendRedirect("/students");
+                resp.sendRedirect(req.getContextPath() + "/students");
                 break;
             case "update":
                 int id = Integer.parseInt(req.getParameter("id"));
@@ -70,12 +70,12 @@ public class StudentController extends HttpServlet {
                 String updatedAddress = req.getParameter("address");
                 Student updatedStudent = new Student(id, updatedName, updatedAddress);
                 studentService.update(updatedStudent);
-                resp.sendRedirect("/students");
+                resp.sendRedirect(req.getContextPath() + "/students");
                 break;
             case "delete":
                 id = Integer.parseInt(req.getParameter("id"));
                 studentService.deleteById(id);
-                resp.sendRedirect("/students");
+                resp.sendRedirect(req.getContextPath() + "/students");
                 break;
         }
     }
