@@ -16,4 +16,6 @@ public interface IStudentRepository {
     Student getById(int id);
 
     List<Student> searchByName(String name);
+
+    List<Student> searchByPhoneAndName(String phone, String name);
 }

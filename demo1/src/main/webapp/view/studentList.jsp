@@ -13,7 +13,8 @@
     <form action="/students" method="get" class="mb-3">
         <input type="hidden" name="action" value="search" />
         <div class="input-group">
-            <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên" required>
+            <input type="text" name="name" class="form-control" placeholder="Tìm kiếm theo tên">
+            <input type="text" name="phone" class="form-control" placeholder="Tìm kiếm theo số điện thoại">
             <button class="btn btn-outline-secondary" type="submit">Tìm</button>
         </div>
     </form>
@@ -27,6 +28,8 @@
             <th>ID</th>
             <th>Name</th>
             <th>Address</th>
+            <th>Age</th>
+            <th>Phone</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -37,8 +40,10 @@
                 <td>${student.id}</td>
                 <td>${student.name}</td>
                 <td>${student.address}</td>
+                <td>${student.age}</td>
+                <td>${student.phone}</td>
                 <td>
-                    <button class="btn btn-warning" onclick="window.location.href='/students?action=edit&id=${student.id}'">
+                    <button class="btn btn-warning" onclick="openEditModal(${student.id}, '${student.name}', '${student.address}', '${student.age}', '${student.phone}')">
                         Sửa
                     </button>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal${student.id}">
@@ -89,6 +94,14 @@
                             <label for="studentAddress" class="form-label">Địa chỉ:</label>
                             <input type="text" class="form-control" id="studentAddress" name="address" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="studentAge" class="form-label">Tuổi:</label>
+                            <input type="text" class="form-control" id="studentAge" name="age" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentPhone" class="form-label">Số điện thoại:</label>
+                            <input type="text" class="form-control" id="studentPhone" name="phone" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
@@ -97,10 +110,12 @@
     </div>
 
     <script>
-        function openEditModal(id, name, address) {
+        function openEditModal(id, name, address, age, phone) {
             document.getElementById('studentId').value = id;
             document.getElementById('studentName').value = name;
             document.getElementById('studentAddress').value = address;
+            document.getElementById('studentAge').value = age;
+            document.getElementById('studentPhone').value = phone;
             document.getElementById('studentModalLabel').innerText = "Cập nhật học sinh";
             const modal = new bootstrap.Modal(document.getElementById('studentModal'));
             modal.show();

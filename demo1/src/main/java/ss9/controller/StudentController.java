@@ -2,8 +2,7 @@ package ss9.controller;
 
 import ss9.model.Student;
 import ss9.service.IStudentService;
-import ss9.service.StudentService;
-
+import ss9.service.impl.StudentService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,15 +26,17 @@ public class StudentController extends HttpServlet {
             case "create":
                 req.getRequestDispatcher("/view/create.jsp").forward(req, resp);
                 break;
-            case "edit":
-                int id = Integer.parseInt(req.getParameter("id"));
-                Student student = studentService.getById(id);
-                req.setAttribute("student", student);
-                req.getRequestDispatcher("/view/update.jsp").forward(req, resp);
-                break;
+              case "edit":
+              int id = Integer.parseInt(req.getParameter("id"));
+              Student student = studentService.getById(id);
+              req.setAttribute("student", student);
+              req.getRequestDispatcher("/view/update.jsp").forward(req, resp);
+               break;
+
             case "search":
-                String searchTerm = req.getParameter("search");
-                List<Student> searchResults = studentService.searchByName(searchTerm);
+                String phone = req.getParameter("phone");
+                String name = req.getParameter("name");
+                List<Student> searchResults = studentService.searchByPhoneAndName(phone, name);
                 req.setAttribute("students", searchResults);
                 req.setAttribute("nameClass", "students");
                 req.getRequestDispatcher("/view/studentList.jsp").forward(req, resp);
@@ -43,7 +44,7 @@ public class StudentController extends HttpServlet {
             default:
                 List<Student> students = studentService.getAll();
                 req.setAttribute("students", students);
-                req.setAttribute("nameClass", "students");
+
                 req.getRequestDispatcher("/view/studentList.jsp").forward(req, resp);
                 break;
         }
@@ -56,22 +57,28 @@ public class StudentController extends HttpServlet {
         if (action == null) {
             action = "";
         }
+        int id;
         switch (action) {
             case "create":
                 String name = req.getParameter("name");
                 String address = req.getParameter("address");
-                Student student = new Student(name, address);
+                String age = req.getParameter("age");
+                String phone = req.getParameter("phone");
+                Student student = new Student(name, address,age,phone);
                 studentService.add(student);
                 resp.sendRedirect(req.getContextPath() + "/students");
                 break;
-            case "update":
-                int id = Integer.parseInt(req.getParameter("id"));
+            case "edit":
+                id = Integer.parseInt(req.getParameter("id"));
                 String updatedName = req.getParameter("name");
                 String updatedAddress = req.getParameter("address");
-                Student updatedStudent = new Student(id, updatedName, updatedAddress);
+                String updatedAge = req.getParameter("age");
+                String updatedPhone = req.getParameter("phone");
+                Student updatedStudent = new Student(id, updatedName, updatedAddress, updatedAge, updatedPhone);
                 studentService.update(updatedStudent);
                 resp.sendRedirect(req.getContextPath() + "/students");
                 break;
+
             case "delete":
                 id = Integer.parseInt(req.getParameter("id"));
                 studentService.deleteById(id);

@@ -14,7 +14,11 @@ public interface IStudentService {
 
     void update(Student updatedStudent);
 
-    List<Student> searchByName(String searchTerm);
+
 
     Student getById(int id);
+
+    List<Student> searchByPhoneAndName(String searchTerm);
+
+    List<Student> searchByPhoneAndName(String phone, String name);
 }

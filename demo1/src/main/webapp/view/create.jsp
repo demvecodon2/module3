@@ -14,6 +14,8 @@
 <form method="post">
     <label for="name">Name</label> <input id="name" name="name">
     <label for="address">Address</label> <input id="address" name="address">
+    <label for="age">Age</label> <input id="age" name="age">
+    <label for="phone">Phone</label><input id="phone" name="phone">
     <button type="submit">Thêm mới</button>
 </form>
 </body>

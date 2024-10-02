@@ -45,6 +45,13 @@
     <label for="address">Địa Chỉ</label>
     <input id="address" name="address" type="text" placeholder="Nhập địa chỉ" required>
 
+    <label for="age">Tuổi</label>
+    <input id="age" name="age" type="text" placeholder="nhập tuổi" required>
+
+    <label for="phone">số điện thoại</label>
+    <input id="phone" name="phone" type="text" placeholder="nhập số điện thoại" required>
+
+
     <button type="submit">Cập Nhật</button>
 </form>
 </body>

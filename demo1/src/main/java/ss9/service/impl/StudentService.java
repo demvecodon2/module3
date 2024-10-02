@@ -1,8 +1,9 @@
-package ss9.service;
+package ss9.service.impl;
 
 import ss9.model.Student;
 import ss9.repository.IStudentRepository;
 import ss9.repository.StudentRepository;
+import ss9.service.IStudentService;
 
 import java.util.List;
 
@@ -51,11 +52,13 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public List<Student> searchByName(String name) {
-        if (name != null && !name.trim().isEmpty()) {
-            return studentRepository.searchByName(name);
-        } else {
-            throw new IllegalArgumentException("Tên tìm kiếm không hợp lệ");
-        }
+    public List<Student> searchByPhoneAndName(String searchTerm) {
+        return studentRepository.searchByPhoneAndName(searchTerm, searchTerm);
+    }
+
+    @Override
+    public List<Student> searchByPhoneAndName(String phone, String name) {
+        List<Student> results = studentRepository.searchByPhoneAndName(phone, name);
+        return results;
     }
 }
