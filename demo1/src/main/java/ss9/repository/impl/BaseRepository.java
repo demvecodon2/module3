@@ -1,4 +1,4 @@
-package ss9.repository;
+package ss9.repository.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

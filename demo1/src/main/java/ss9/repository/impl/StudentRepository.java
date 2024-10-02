@@ -1,6 +1,8 @@
-package ss9.repository;
+package ss9.repository.impl;
 
+import ss9.DTO.StudentDTO;
 import ss9.model.Student;
+import ss9.repository.IStudentRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -168,5 +170,10 @@ public class StudentRepository implements IStudentRepository {
         }
 
         return students;
+    }
+
+    @Override
+    public List<StudentDTO> getAllDTO() {
+        return List.of();
     }
 }

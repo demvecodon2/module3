@@ -1,10 +1,12 @@
 package ss9.service.impl;
 
+import ss9.DTO.StudentDTO;
 import ss9.model.Student;
 import ss9.repository.IStudentRepository;
-import ss9.repository.StudentRepository;
+import ss9.repository.impl.StudentRepository;
 import ss9.service.IStudentService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentService implements IStudentService {
@@ -61,4 +63,14 @@ public class StudentService implements IStudentService {
         List<Student> results = studentRepository.searchByPhoneAndName(phone, name);
         return results;
     }
+
+    @Override
+    public List<StudentDTO> getAllDTO() {
+        List<StudentDTO> studentDTOs = new ArrayList<>();
+        for (StudentDTO student : studentDTOs) {
+            studentDTOs.add(new StudentDTO(student.getId(), student.getName(), student.getAddress()));
+        }
+        return studentDTOs;
+    }
+
 }

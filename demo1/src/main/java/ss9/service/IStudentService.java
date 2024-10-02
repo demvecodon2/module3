@@ -1,6 +1,7 @@
 package ss9.service;
 
 
+import ss9.DTO.StudentDTO;
 import ss9.model.Student;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface IStudentService {
     List<Student> searchByPhoneAndName(String searchTerm);
 
     List<Student> searchByPhoneAndName(String phone, String name);
+
+    List<StudentDTO> getAllDTO();
 }

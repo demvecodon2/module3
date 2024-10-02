@@ -1,5 +1,6 @@
 package ss9.repository;
 
+import ss9.DTO.StudentDTO;
 import ss9.model.Student;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface IStudentRepository {
     List<Student> searchByName(String name);
 
     List<Student> searchByPhoneAndName(String phone, String name);
+
+    List<StudentDTO> getAllDTO();
 }
