@@ -2,12 +2,12 @@ package case_model3.model;
 
 public class ProductCategory {
  private int category_id;
- private String category_name;
+ private String name;
  private String description;
  public ProductCategory() {}
- public ProductCategory(int category_id, String category_name, String description) {
+ public ProductCategory(int category_id, String name, String description) {
      this.category_id = category_id;
-     this.category_name = category_name;
+     this.name =name;
      this.description = description;
  }
 
@@ -19,12 +19,12 @@ public class ProductCategory {
         this.category_id = category_id;
     }
 
-    public String getCategory_name() {
-        return category_name;
+    public String getName() {
+        return name;
     }
 
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

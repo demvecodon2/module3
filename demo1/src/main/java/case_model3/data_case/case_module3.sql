@@ -44,9 +44,12 @@ CREATE TABLE product_category (
                                   name VARCHAR(100) NOT NULL,
                                   description VARCHAR(255)
 );
-insert into product_category (name, description) values ('hoa quả trong nước','hàng organic'),
-                                                        ('hoa quả nhập khẩu','nhập từ nước ngoài'),
-                                                        ('hàng biếu tặng','phù hợp cho tặng biếu');
+insert into product_category (name, description) values ('trái cây','hàng organic'),
+                                                        ('hoa quả nhập khẩu ','nhập từ nước ngoài'),
+                                                        ('giỏ trái cây','phù hợp cho tặng biếu'),
+                                                        ('hoa quả sấy','ko chất bảo quản');
+
+
 
 
 -- Bảng sản phẩm

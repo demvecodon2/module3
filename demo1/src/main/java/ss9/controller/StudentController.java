@@ -45,7 +45,7 @@ public class StudentController extends HttpServlet {
                     int id = Integer.parseInt(req.getParameter("id"));
                     Student student = studentService.getById(id);
                     req.setAttribute("student", student);
-                    req.getRequestDispatcher("/view/update.jsp").forward(req, resp);
+                   req.getRequestDispatcher("/view/update.jsp").forward(req, resp);
                     break;
 
                 case ACTION_SEARCH:

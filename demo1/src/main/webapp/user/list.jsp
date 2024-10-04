@@ -25,19 +25,23 @@
         <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Email</th>
-            <th>Country</th>
-            <th>Actions</th>
+            <th>Mô tả</th>
+            <th>giá</th>
+            <th>hình ảnh</th>
+            <th> thao tác</th>
+
         </tr>
-        <c:forEach var="user" items="${listUser}">
+        <c:forEach var="product" items="${listUser}">
             <tr>
-                <td><c:out value="${user.id}"/></td>
-                <td><c:out value="${user.name}"/></td>
-                <td><c:out value="${user.email}"/></td>
-                <td><c:out value="${user.country}"/></td>
+                <td><c:out value="${product.id}"/></td>
+                <td><c:out value="${product.name}"/></td>
+                <td><c:out value="${product.description}"/></td>
+                <td><c:out value="${product.price}"/></td>
+                <td><c:out value="${product.image}"/></td>
+                <td><c:out value="${product.category_id}"/></td>
                 <td>
-                    <a href="/users?action=edit&id=${user.id}">Edit</a>
-                    <a href="/users?action=delete&id=${user.id}">Delete</a>
+                    <a href="/users?action=edit&id=${product.id}">Edit</a>
+                    <a href="/users?action=delete&id=${product.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>

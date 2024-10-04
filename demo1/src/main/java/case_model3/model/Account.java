@@ -3,14 +3,14 @@ package case_model3.model;
 public class Account {
     private int id;
      private int user_id;
-     private String account_name;
-     private String account_password;
+     private String username;
+     private String password;
      public Account(){}
-     public Account (int id, int user_id, String account_name, String account_password) {
+     public Account (int id, int user_id, String username, String password) {
          this.id = id;
          this.user_id = user_id;
-         this.account_name = account_name;
-         this.account_password = account_password;
+         this.username = username;
+         this.password = password;
      }
 
     public int getId() {
@@ -29,19 +29,19 @@ public class Account {
         this.user_id = user_id;
     }
 
-    public String getAccount_name() {
-        return account_name;
+    public String getusername() {
+        return username;
     }
 
-    public void setAccount_name(String account_name) {
-        this.account_name = account_name;
+    public void setUsername(String account_name) {
+        this.username = account_name;
     }
 
-    public String getAccount_password() {
-        return account_password;
+    public String getsetPassword() {
+        return password;
     }
 
-    public void setAccount_password(String account_password) {
-        this.account_password = account_password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
