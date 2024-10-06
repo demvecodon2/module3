@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-
 @WebServlet(name = "productController", value = "/fruitshop")
 public class ProductController extends HttpServlet {
     private static final String ACTION_CREATE = "create";
@@ -33,14 +32,14 @@ public class ProductController extends HttpServlet {
 
             switch (action) {
                 case ACTION_CREATE:
-                    request.getRequestDispatcher("/fruit/add.jsp").forward(request, response);
+                    request.getRequestDispatcher("/fruit/s.jsp").forward(request, response);
                     return;
 
                 case ACTION_EDIT:
                     int editId = Integer.parseInt(request.getParameter("id"));
                     Product product = productService.getById(editId);
                     request.setAttribute("product", product);
-                    request.getRequestDispatcher("/fruit/edit.jsp").forward(request, response);
+                    request.getRequestDispatcher("/fruit/productDetail.jsp").forward(request, response);
                     return;
 
                 case ACTION_DELETE:
@@ -55,12 +54,12 @@ public class ProductController extends HttpServlet {
                     break;
 
                 default:
-                    products = productService.findAllProducts();
+                    products = productService.findAllProducts(); // Lấy tất cả sản phẩm
                     break;
             }
 
             request.setAttribute("products", products);
-            request.getRequestDispatcher("/fruit/fruit.jsp").forward(request, response);
+            request.getRequestDispatcher("/fruit/fruit.jsp").forward(request, response); // Hiển thị sản phẩm
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid product ID");
         } catch (Exception e) {

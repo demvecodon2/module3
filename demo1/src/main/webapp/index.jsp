@@ -244,27 +244,27 @@
             </div>
         </div>
     </div>
-     <div class="container">
-        <h3 class="text-center mb-5">Sản Phẩm Nổi Bật</h3>
-        <div class="row">
-            <c:forEach var="product" items="${products}">
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card shadow-sm">
-                        <img src="${product.image}" alt="${product.name}" class="card-img-top" style="max-height: 200px;">
-                        <div class="card-body">
-                            <h5 class="card-title"><c:out value="${product.name}"/></h5>
-                            <p class="card-text"><c:out value="${product.description}"/></p>
-                            <p class="text-danger"><c:out value="${product.price}"/> VND</p>
-                            <div class="actions">
-                                <a href="fruitshop?action=search&id=${product.product_name}" class="btn btn-info">Xem</a>
-                                <a href="fruitshop?action=add&name=${product.product_name}" class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn mua sản phẩm này?');">Mua</a>
-                            </div>
+<div class="container mt-5">
+    <h3 class="text-center mb-5">Sản Phẩm Nổi Bật</h3>
+    <div class="row">
+        <c:forEach var="product" items="${products}">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="${product.image}" alt="${product.name}" class="card-img-top" style="max-height: 200px;">
+                    <div class="card-body">
+                        <h5 class="card-title"><c:out value="${product.name}"/></h5>
+                        <p class="card-text"><c:out value="${product.description}"/></p>
+                        <p class="text-danger"><c:out value="${product.price}"/> VND</p>
+                        <div class="actions">
+                            <a href="fruitshop?action=search&id=${product.product_id}" class="btn btn-info">Xem</a>
+                            <a href="fruitshop?action=add&id=${product.product_id}" class="btn btn-success" onclick="return confirm('Bạn có chắc chắn muốn mua sản phẩm này?');">Mua</a>
                         </div>
                     </div>
                 </div>
-            </c:forEach>
-        </div>
+            </div>
+        </c:forEach>
     </div>
+</div>
 </section>
 
 

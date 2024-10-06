@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet(name = "demo", value = "/demo")
-public class Demo extends HttpServlet {
+public class Demo {
     private static final String ACTION_CREATE = "create";
     private static final String ACTION_EDIT = "edit";
     private static final String ACTION_DELETE = "delete";
